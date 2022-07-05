@@ -20,3 +20,12 @@ class Carro(Veiculo):
         self.total_portas = total_portas
         self.modo = modo
         self.potencia = potencia
+
+class Camionete(Veiculo):
+    def init(self, chassi: int, data_fabricado: str, nome: str, placa: str, valor: float, cpf_comprador: str, total_portas: int, cap_cacamba: int, potencia: int, modo: str ):
+        super().__init__(chassi, data_fabricado, nome, placa, valor, cpf_comprador)
+        self.cor = "Roxa"
+        self.total_portas = total_portas
+        self.cap_cacamba = cap_cacamba
+        self.potencia = potencia
+        self.modo = modo
