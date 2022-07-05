@@ -8,11 +8,13 @@ class Veiculo:
         self.__cpf_comprador = 0
         self.cor = cor
 
+
 class Moto(Veiculo):
     def init(self, chassi: int, data_fabricado: str, nome: str, placa: str, valor: float, cpf_comprador: str, cor: str, potencia: int, numero_rodas: int):
         super().__init__(chassi, data_fabricado, nome, placa, valor, cpf_comprador, cor)
         self.potencia = potencia
         self.numero_rodas = numero_rodas
+
 
 class Carro(Veiculo):
     def init(self, chassi: int, data_fabricado: str, nome: str, placa: str, valor: float, cpf_comprador: str, cor: str, total_portas: int, modo: str, potencia: int):
@@ -20,6 +22,7 @@ class Carro(Veiculo):
         self.total_portas = total_portas
         self.modo = modo
         self.potencia = potencia
+
 
 class Camionete(Veiculo):
     def init(self, chassi: int, data_fabricado: str, nome: str, placa: str, valor: float, cpf_comprador: str, total_portas: int, cap_cacamba: int, potencia: int, modo: str ):
