@@ -13,3 +13,10 @@ class Moto(Veiculo):
         super().__init__(chassi, data_fabricado, nome, placa, valor, cpf_comprador, cor)
         self.potencia = potencia
         self.numero_rodas = numero_rodas
+
+class Carro(Veiculo):
+    def init(self, chassi: int, data_fabricado: str, nome: str, placa: str, valor: float, cpf_comprador: str, cor: str, total_portas: int, modo: str, potencia: int):
+        super().__init__(chassi, data_fabricado, nome, placa, valor, cpf_comprador, cor)
+        self.total_portas = total_portas
+        self.modo = modo
+        self.potencia = potencia
