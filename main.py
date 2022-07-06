@@ -32,3 +32,60 @@ class Camionete(Veiculo):
         self.cap_cacamba = cap_cacamba
         self.potencia = potencia
         self.modo = modo
+
+
+while True:
+    print(" ")
+    print("========================================================")
+    print("                     DEVinCar                           ")
+    print("========================================================")
+    print(" [1] - Vender carro.")
+    print(" [2] - Ver carros disponiveis.")
+    print(" [3] - Ver carros vendidos.")
+    print(" [4] - Listar todos os veiculos.")
+    print(" [5] - Para sair.")
+    print("========================================================")
+    print(" ")
+    opcaoEscolhida = input("Digite a opção escolhida: ")
+    print(" ")
+
+    if opcaoEscolhida == "1" :
+        cpfComprador = input("Digite o CPF do comprador: ")
+        venderCarro()
+
+    if opcaoEscolhida == "2" :
+        print(" ")
+        print(" [1] - Ver Motos/Triciclos.")
+        print(" [2] - Ver Carros.")
+        print(" [3] - Ver Camionetes.")
+        print(" [4] - Ver Todos.")
+        print(" [5] - Voltar.")
+        print(" ")
+        opcaoEscolhida2 = input("Digite a opção escolhida: ")
+        print(" ")
+        if opcaoEscolhida2 == "1":
+            listaMotosDisponivel()
+        if opcaoEscolhida2 == "2":
+            listaCarrosDisponivel()
+        if opcaoEscolhida2 == "3":
+            listaCamionetesDisponivel()
+        if opcaoEscolhida2 == "4":
+            listaVeiculosDisponivel()
+        if opcaoEscolhida2 == "5":
+            continue
+
+
+    if opcaoEscolhida == "3" :
+        listaVeiculosVendidos()
+
+    if opcaoEscolhida == "4" :
+        listaTodosVeiculos()
+
+    if opcaoEscolhida == "5" :
+        print("Você saiu!")
+        break
+
+    else: 
+        print("Opção Invalida!")
+        print("Tente novamente!")
+        continue
