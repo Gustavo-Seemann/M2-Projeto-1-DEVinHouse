@@ -1,10 +1,11 @@
 from uuid import uuid4
+from datetime import datetime
 
 Veiculos = {'motos': '', 'carros': '', 'camionetes': ''}
 Motos = []
 Carros = []
 Camionetes = []
-
+TransferenciasRealizadas = []
 
 
 class Veiculo:
@@ -29,6 +30,14 @@ class Veiculo:
     @cpf_comprador.setter
     def cpf_comprador(self, cpf):
         self.__cpf_comprador = cpf
+
+    def mostrarTodos():
+        for motos in Veiculos['motos']:
+                print(f"Moto Modelo: {motos['nome']}, {motos['data_fabricado']}, de {motos['numero_rodas']} rodas, com a Potência de: {motos['potencia']} cavalos, Placa: {motos['placa']}, Cor: {motos['cor']}, possui o valor de R${motos['valor']}")
+        for carros in Veiculos['carros']:
+            print(f"Carro Modelo: {carros['nome']}, {carros['data_fabricado']}, de {carros['total_portas']} de portas, Motor: {carros['modo']} com a Potência de: {carros['potencia']} cavalos, Placa: {carros['placa']}, Cor: {carros['cor']}, possui o valor de R${carros['valor']}")
+        for camionetes in Veiculos['camionetes']:
+            print(f"Camionete Modelo: {camionetes['nome']}, {camionetes['data_fabricado']}, Motor: {camionetes['modo']} com a Potência de: {camionetes['potencia']} cavalos, Caçamba com capacidade de {camionetes['cap_cacamba']} litros, Placa: {camionetes['placa']}, Cor: {camionetes['cor']}, possui o valor de R$ {camionetes['valor']}")
 
 
 
@@ -125,6 +134,7 @@ class Camionete(Veiculo):
 
 
 
+
 moto1 = Moto("2019", "Harley Davidson", "39AKB1", 39000, "Vermelha", 100, 2)
 moto1.CadastrarMoto()
 moto2 = Moto("2020", "Yamaha", "399BB1", 39300, "Azul", 130, 3)
@@ -197,7 +207,7 @@ print("RODOU!")
 #         listaVeiculosVendidos()
 
 #     if opcaoEscolhida == "4" :
-#         listaTodosVeiculos()
+#         Veiculo.MostrarTodos()
 
 #     if opcaoEscolhida == "5" :
 #         print("Você saiu!")
