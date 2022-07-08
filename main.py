@@ -7,6 +7,7 @@ Carros = []
 Camionetes = []
 TransferenciasRealizadas = []
 
+
 class Veiculo:
     def __init__(self, data_fabricado: str, nome: str, placa: str, valor: float, cor: str):
         self.__chassi = str(uuid4())
@@ -30,6 +31,13 @@ class Veiculo:
     def cpf_comprador(self, cpf):
         self.__cpf_comprador = cpf
 
+    def VenderVeiculo(self):
+        cpf_cliente = input("Digite o CPF do cliente: ")
+        self.vendido = True
+        self.cpf_comprador = cpf_cliente
+        TransferenciasRealizadas.append(Transferencia(self.__dict__, cpf_cliente, self.valor))
+        print("Venda concluida com sucesso!")
+
 
     @staticmethod
     def mostrarTodos():
@@ -39,6 +47,22 @@ class Veiculo:
             print(f"Carro Modelo: {carros.nome}, {carros.data_fabricado}, de {carros.total_portas} de portas, Motor: {carros.modo} com a Potência de: {carros.potencia} cavalos, Placa: {carros.placa}, Cor: {carros.cor}, possui o valor de R${carros.valor}")
         for camionetes in Veiculos['camionetes']:
             print(f"Camionete Modelo: {camionetes.nome}, {camionetes.data_fabricado}, Motor: {camionetes.modo} com a Potência de: {camionetes.potencia} cavalos, Caçamba com capacidade de {camionetes.cap_cacamba} litros, Placa: {camionetes.placa}, Cor: {camionetes.cor}, possui o valor de R$ {camionetes.valor}")
+
+    @staticmethod
+    def mostrarTodosVendidos():
+        contador = 1
+        for motos in Veiculos['motos']:
+                if motos.vendido == True:
+                    print(f"[VENDIDO] [{contador}] - Moto Modelo: {motos.nome}, {motos.data_fabricado}, de {motos.numero_rodas} rodas, com a Potência de: {motos.potencia} cavalos, Placa: {motos.placa}, Cor: {motos.cor}, possui o valor de R${motos.valor}")
+                    contador += 1
+        for carros in Veiculos['carros']:
+            if carros.vendido == True:
+                print(f"[VENDIDO] [{contador}] - Carro Modelo: {carros.nome}, {carros.data_fabricado}, de {carros.total_portas} de portas, Motor: {carros.modo} com a Potência de: {carros.potencia} cavalos, Placa: {carros.placa}, Cor: {carros.cor}, possui o valor de R${carros.valor}")
+                contador += 1
+        for camionetes in Veiculos['camionetes']:
+            if camionetes.vendido == True:
+                print(f"[VENDIDO] [{contador}] - Camionete Modelo: {camionetes.nome}, {camionetes.data_fabricado}, Motor: {camionetes.modo} com a Potência de: {camionetes.potencia} cavalos, Caçamba com capacidade de {camionetes.cap_cacamba} litros, Placa: {camionetes.placa}, Cor: {camionetes.cor}, possui o valor de R$ {camionetes.valor}")
+                contador += 1
 
 
 
@@ -54,8 +78,10 @@ class Moto(Veiculo):
 
     @staticmethod
     def MostrarMotos():
+        contador = 1
         for motos in Veiculos['motos']:
-            print(f"Moto Modelo: {motos.nome}, {motos.data_fabricado}, de {motos.numero_rodas} rodas, com a Potência de: {motos.potencia} cavalos, Placa: {motos.placa}, Cor: {motos.cor}, possui o valor de R${motos.valor}")
+            print(f"[{contador}] - Moto Modelo: {motos.nome}, {motos.data_fabricado}, de {motos.numero_rodas} rodas, com a Potência de: {motos.potencia} cavalos, Placa: {motos.placa}, Cor: {motos.cor}, possui o valor de R${motos.valor}")
+            contador += 1
 
 
 
@@ -72,8 +98,10 @@ class Carro(Veiculo):
 
     @staticmethod
     def MostrarCarros():
+        contador = 1
         for carros in Veiculos['carros']:
-            print(f"Carro Modelo: {carros.nome}, {carros.data_fabricado}, de {carros.total_portas} de portas, Motor: {carros.modo} com a Potência de: {carros.potencia} cavalos, Placa: {carros.placa}, Cor: {carros.cor}, possui o valor de R${carros.valor}")
+            print(f"[{contador}] - Carro Modelo: {carros.nome}, {carros.data_fabricado}, de {carros.total_portas} de portas, Motor: {carros.modo} com a Potência de: {carros.potencia} cavalos, Placa: {carros.placa}, Cor: {carros.cor}, possui o valor de R${carros.valor}")
+            contador += 1
 
 
 
@@ -91,10 +119,18 @@ class Camionete(Veiculo):
 
     @staticmethod
     def MostrarCamionetes():
-        contador = 0
+        contador = 1
         for camionetes in Veiculos['camionetes']:
-            print(f"{contador} Camionete Modelo: {camionetes.nome}, {camionetes.data_fabricado}, Motor: {camionetes.modo} com a Potência de: {camionetes.potencia} cavalos, Caçamba com capacidade de {camionetes.cap_cacamba} litros, Placa: {camionetes.placa}, Cor: {camionetes.cor}, possui o valor de R$ {camionetes.valor}")
+            print(f"[{contador}] - Camionete Modelo: {camionetes.nome}, {camionetes.data_fabricado}, Motor: {camionetes.modo} com a Potência de: {camionetes.potencia} cavalos, Caçamba com capacidade de {camionetes.cap_cacamba} litros, Placa: {camionetes.placa}, Cor: {camionetes.cor}, possui o valor de R$ {camionetes.valor}")
             contador += 1
+
+
+class Transferencia:
+    def __init__(self, dados_veiculo, cpf_comprador, valor):
+        self.dados_veiculo = dados_veiculo
+        self.cpf_comprador = cpf_comprador
+        self.valor = valor
+        self.data =  datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
 
 
@@ -138,8 +174,43 @@ while continuar == True:
     print(" ")
 
     if opcaoEscolhida == "1" :
-        cpfComprador = input("Digite o CPF do comprador: ")
-        venderCarro()
+        print("Escolha o modelo: ")
+        print(" [1] - Ver Motos/Triciclos.")
+        print(" [2] - Ver Carros.")
+        print(" [3] - Ver Camionetes.\n")
+        print(" [4] - Voltar")
+        print(" ")
+        opcaoEscolhida2 = input("Digite a opção escolhida: ")
+        print(" ")
+        if opcaoEscolhida2 == "1":
+            Moto.MostrarMotos()
+            motoEscolhida = input("Insira a opção de moto escolhida: ")
+            if motoEscolhida == "1" :
+                Motos[0].VenderVeiculo()
+            if motoEscolhida == "2" :
+                Motos[1].VenderVeiculo()
+            if motoEscolhida == "3" :
+                Motos[2].VenderVeiculo()
+        if opcaoEscolhida2 == "2":
+            Carro.MostrarCarros()
+            carroEscolhido = input("Insira a opção de carro escolhido: ")
+            if carroEscolhido == "1" :
+                Carros[0].VenderVeiculo()
+            if carroEscolhido == "2" :
+                Carros[1].VenderVeiculo()
+            if carroEscolhido == "3" :
+                Carros[2].VenderVeiculo()
+        if opcaoEscolhida2 == "3":
+            Camionete.MostrarCamionetes()
+            camioneteEscolhida = input("Insira a opção de camionete escolhida: ")
+            if camioneteEscolhida == "1" :
+                Camionetes[0].VenderVeiculo()
+            if camioneteEscolhida == "2" :
+                Camionetes[1].VenderVeiculo()
+            if camioneteEscolhida == "3" :
+                Camionetes[2].VenderVeiculo()
+        if opcaoEscolhida2 == "4":
+            continue
 
     elif opcaoEscolhida == "2" :
         print(" ")
@@ -163,7 +234,7 @@ while continuar == True:
             continue
 
     elif opcaoEscolhida == "3" :
-        listaVeiculosVendidos()
+        Veiculo.mostrarTodosVendidos()
 
     elif opcaoEscolhida == "4" :
         Veiculo.mostrarTodos()
