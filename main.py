@@ -14,7 +14,7 @@ class Veiculo:
         self.data_fabricado = data_fabricado
         self.nome = nome
         self.placa = placa
-        self.valor = valor
+        self.valor = float(valor)
         self.__cpf_comprador = 0
         self.cor = cor
         self.vendido = "Disponivel"
@@ -42,26 +42,39 @@ class Veiculo:
         print("----------------------------")
         print("         INFORMAÇÕES")
         print("----------------------------")
-        print(f"PLACA: {self.placa}      VENDIDO: {self.vendido}")
+        print(f"PLACA: {self.placa}      STATUS: {self.vendido}")
         print(f"MODELO: {self.nome}      ANO: {self.data_fabricado}")
         print(f"CHASSI: {self.chassi}    COR: {self.cor}")
         print(f"CPF DO COMPRADOR: {self.cpf_comprador}")
-        print(f"VALOR: {self.valor}")
-        print("----------------------------")
+        print(f"VALOR: R${self.valor}")
+
+    def alterarInformacao(self):
+        valor = float(input("Digite o novo valor do veiculo: "))
+        cor = input("Digite a nova cor do veiculo: ")
+        self.valor = valor
+        self.cor = cor
+        print("Informações alteradas com sucesso!")
 
 
 
     @staticmethod
     def mostrarTodos():
+        print("----------------------------------")
+        print("             VEICULOS")
+        print("----------------------------------")
         for motos in Veiculos['motos']:
                 print(f"{motos.vendido} - PLACA: [{motos.placa}] - Moto Modelo: {motos.nome}, {motos.data_fabricado}, de {motos.numero_rodas} rodas, com a Potência de: {motos.potencia} cavalos, Cor: {motos.cor}, possui o valor de R${motos.valor}")
         for carros in Veiculos['carros']:
             print(f"{carros.vendido} - PLACA: [{carros.placa}] - Carro Modelo: {carros.nome}, {carros.data_fabricado}, de {carros.total_portas} de portas, Motor: {carros.modo} com a Potência de: {carros.potencia} cavalos, Cor: {carros.cor}, possui o valor de R${carros.valor}")
         for camionetes in Veiculos['camionetes']:
             print(f"{camionetes.vendido} - PLACA: [{camionetes.placa}] - Camionete Modelo: {camionetes.nome}, {camionetes.data_fabricado}, Motor: {camionetes.modo} com a Potência de: {camionetes.potencia} cavalos, Caçamba com capacidade de {camionetes.cap_cacamba} litros, Cor: {camionetes.cor}, possui o valor de R$ {camionetes.valor}")
+        print("----------------------------------")
 
     @staticmethod
     def mostrarTodosVendidos():
+        print("----------------------------------")
+        print("         VEICULOS VENDIDOS")
+        print("----------------------------------")
         for motos in Veiculos['motos']:
                 if motos.vendido == "VENDIDO" :
                     print(f"[{motos.vendido}] PLACA: [{motos.placa}] - Moto Modelo: {motos.nome}, {motos.data_fabricado}, de {motos.numero_rodas} rodas, com a Potência de: {motos.potencia} cavalos, Cor: {motos.cor}, possui o valor de R${motos.valor}")
@@ -71,7 +84,8 @@ class Veiculo:
         for camionetes in Veiculos['camionetes']:
             if camionetes.vendido == "VENDIDO" :
                 print(f"[{camionetes.vendido}] PLACA: [{camionetes.placa}] - Camionete Modelo: {camionetes.nome}, {camionetes.data_fabricado}, Motor: {camionetes.modo} com a Potência de: {camionetes.potencia} cavalos, Caçamba com capacidade de {camionetes.cap_cacamba} litros, Cor: {camionetes.cor}, possui o valor de R$ {camionetes.valor}")
-
+        print("")
+        print("----------------------------------")
 
 
 class Moto(Veiculo):
@@ -83,6 +97,12 @@ class Moto(Veiculo):
     def CadastrarMoto(self):
         Motos.append(self)
         Veiculos['motos'] = Motos
+
+    def ListarInformacao(self):
+        super().ListarInformacao()
+        print(f"POTÊNCIA (CV): {self.potencia}")
+        print(f"NÚMERO DE RODAS: {self.numero_rodas}")
+        print("----------------------------")
 
     @staticmethod
     def MostrarMotos():
@@ -103,6 +123,12 @@ class Carro(Veiculo):
         Carros.append(self)
         Veiculos['carros'] = Carros
 
+    def ListarInformacao(self):
+        super().ListarInformacao()
+        print(f"NÚMERO DE PORTAS: {self.total_portas}")
+        print(f"MOTOR: {self.modo}  POTÊNCIA (CV): {self.potencia}")
+        print("----------------------------")
+
     @staticmethod
     def MostrarCarros():
         for carros in Veiculos['carros']:
@@ -122,6 +148,18 @@ class Camionete(Veiculo):
     def CadastrarCamionetes(self):
         Camionetes.append(self)
         Veiculos['camionetes'] = Camionetes
+
+    def ListarInformacao(self):
+        super().ListarInformacao()
+        print(f"NÚMERO DE PORTAS: {self.total_portas}")
+        print(f"CAPACIDADE DA CAÇAMBA (L): {self.cap_cacamba}")
+        print(f"MOTOR: {self.modo}  POTÊNCIA (CV): {self.potencia}")
+        print("----------------------------")
+
+    def alterarInformacao(self):
+        valor = float(input("Digite o novo valor do veiculo: "))
+        self.valor = valor
+        print("Informações alteradas com sucesso!")
 
     @staticmethod
     def MostrarCamionetes():
@@ -168,12 +206,13 @@ while continuar == True:
     print("========================================================")
     print("                     DEVinCar                           ")
     print("========================================================")
-    print(" [1] - Vender carro.")
-    print(" [2] - Ver carros disponiveis.")
-    print(" [3] - Ver carros vendidos.")
-    print(" [4] - Listar todos os veiculos.")
-    print(" [5] - Pesquisar Informação.")
-    print(" [6] - Para sair.")
+    print(" [1] - Vender veículo.")
+    print(" [2] - Ver veículos disponiveis.")
+    print(" [3] - Ver veículos vendidos.")
+    print(" [4] - Listar todos os veículos.")
+    print(" [5] - Pesquisar informação do veículo.")
+    print(" [6] - Alterar informação do veículo.")
+    print(" [7] - Para sair.")
     print("========================================================")
     print(" ")
     opcaoEscolhida = input("Digite a opção escolhida: ")
@@ -237,14 +276,16 @@ while continuar == True:
         print(" ")
         if opcaoEscolhida2 == "1":
             Moto.MostrarMotos()
-        if opcaoEscolhida2 == "2":
+        elif opcaoEscolhida2 == "2":
             Carro.MostrarCarros()
-        if opcaoEscolhida2 == "3":
+        elif opcaoEscolhida2 == "3":
             Camionete.MostrarCamionetes()
-        if opcaoEscolhida2 == "4":
+        elif opcaoEscolhida2 == "4":
             Veiculo.mostrarTodos()
-        if opcaoEscolhida2 == "5":
+        elif opcaoEscolhida2 == "5":
             continue
+        else:
+            print("Opção Invalida!")
 
 
     elif opcaoEscolhida == "3" :
@@ -265,8 +306,19 @@ while continuar == True:
         else:
             VeiculosTodos[resultIndice].ListarInformacao()
 
-
     elif opcaoEscolhida == "6" :
+        VeiculoPesquisado = input("Insira a placa do veiculo a ter informações alteradas: ")
+        VeiculoPesquisado = VeiculoPesquisado.upper()
+        VeiculosTodos = Motos + Carros + Camionetes
+        try:
+            resultIndice = next(i for i,obj in enumerate(VeiculosTodos) if obj.placa == VeiculoPesquisado)
+        except:
+            print("Veiculo não encontrado!")
+        else:
+            VeiculosTodos[resultIndice].alterarInformacao()
+
+
+    elif opcaoEscolhida == "7" :
         print("Você saiu!")
         break
 
