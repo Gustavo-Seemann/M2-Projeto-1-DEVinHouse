@@ -18,6 +18,7 @@ class Veiculo:
         self.__cpf_comprador = 0
         self.cor = cor
         self.vendido = "Disponivel"
+        self.transferencia = "Ainda não vendido."
 
     @property
     def chassi(self):
@@ -35,7 +36,8 @@ class Veiculo:
         cpf_cliente = input("Digite o CPF do cliente: ")
         self.vendido = "VENDIDO"
         self.cpf_comprador = cpf_cliente
-        TransferenciasRealizadas.append(Transferencia(self.__dict__, cpf_cliente, self.valor))
+        self.transferencia = Transferencia(self.__dict__, cpf_cliente, self.valor)
+        TransferenciasRealizadas.append(self.transferencia)
         print("Venda concluida com sucesso!")
 
     def ListarInformacao(self):
@@ -47,6 +49,8 @@ class Veiculo:
         print(f"CHASSI: {self.chassi}    COR: {self.cor}")
         print(f"CPF DO COMPRADOR: {self.cpf_comprador}")
         print(f"VALOR: R${self.valor}")
+        if self.vendido == "VENDIDO":
+            print(f"VENDIDO NA DATA DE: {self.transferencia.data}")
 
     def alterarInformacao(self):
         valor = float(input("Digite o novo valor do veiculo: "))
@@ -54,7 +58,6 @@ class Veiculo:
         self.valor = valor
         self.cor = cor
         print("Informações alteradas com sucesso!")
-
 
 
     @staticmethod
@@ -85,6 +88,7 @@ class Veiculo:
             if camionetes.vendido == "VENDIDO" :
                 print(f"[{camionetes.vendido}] PLACA: [{camionetes.placa}] - Camionete Modelo: {camionetes.nome}, {camionetes.data_fabricado}, Motor: {camionetes.modo} com a Potência de: {camionetes.potencia} cavalos, Caçamba com capacidade de {camionetes.cap_cacamba} litros, Cor: {camionetes.cor}, possui o valor de R$ {camionetes.valor}")
         print("")
+        Transferencia.MaiorMenorVenda()
         print("----------------------------------")
 
 
@@ -174,6 +178,31 @@ class Transferencia:
         self.cpf_comprador = cpf_comprador
         self.valor = valor
         self.data =  datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+    @staticmethod
+    def MaiorMenorVenda():
+        print("----------------------------")
+        print("    MAIOR VALOR DE VENDA")
+        print("----------------------------")
+        maiorPreco = 0
+        for preco in TransferenciasRealizadas:
+            if preco.valor >= maiorPreco:
+                maiorPreco = preco.valor
+        print(f"O maior valor de venda realizado foi R${maiorPreco}!")
+        result = [x for x in TransferenciasRealizadas if x.valor == maiorPreco]
+        for transferencia in result:
+            print(f"VEÍCULO: {transferencia.dados_veiculo['nome']}, PLACA: {transferencia.dados_veiculo['placa']}, CPF DO COMPRADOR: {transferencia.cpf_comprador}, REALIZADA EM: {transferencia.data}")
+        print("----------------------------")
+        print("    MENOR VALOR DE VENDA")
+        print("----------------------------")
+        menorPreco = 0
+        for preco in TransferenciasRealizadas:
+            if preco.valor <= maiorPreco:
+                menorPreco = preco.valor
+        print(f"E o menor valor de venda realizado foi R${menorPreco}!")
+        result2 = [x for x in TransferenciasRealizadas if x.valor == menorPreco]
+        for transferencia in result2:
+            print(f"VEÍCULO: {transferencia.dados_veiculo['nome']}, PLACA: {transferencia.dados_veiculo['placa']}, CPF DO COMPRADOR: {transferencia.cpf_comprador}, REALIZADA EM: {transferencia.data}")
 
 
 
