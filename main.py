@@ -17,7 +17,7 @@ class Veiculo:
         self.valor = valor
         self.__cpf_comprador = 0
         self.cor = cor
-        self.vendido = False
+        self.vendido = "Disponivel"
 
     @property
     def chassi(self):
@@ -33,32 +33,44 @@ class Veiculo:
 
     def VenderVeiculo(self):
         cpf_cliente = input("Digite o CPF do cliente: ")
-        self.vendido = True
+        self.vendido = "VENDIDO"
         self.cpf_comprador = cpf_cliente
         TransferenciasRealizadas.append(Transferencia(self.__dict__, cpf_cliente, self.valor))
         print("Venda concluida com sucesso!")
+
+    def ListarInformacao(self):
+        print("----------------------------")
+        print("         INFORMAÇÕES")
+        print("----------------------------")
+        print(f"PLACA: {self.placa}      VENDIDO: {self.vendido}")
+        print(f"MODELO: {self.nome}      ANO: {self.data_fabricado}")
+        print(f"CHASSI: {self.chassi}    COR: {self.cor}")
+        print(f"CPF DO COMPRADOR: {self.cpf_comprador}")
+        print(f"VALOR: {self.valor}")
+        print("----------------------------")
+
 
 
     @staticmethod
     def mostrarTodos():
         for motos in Veiculos['motos']:
-                print(f"PLACA: [{motos.placa}] - Moto Modelo: {motos.nome}, {motos.data_fabricado}, de {motos.numero_rodas} rodas, com a Potência de: {motos.potencia} cavalos, Cor: {motos.cor}, possui o valor de R${motos.valor}")
+                print(f"{motos.vendido} - PLACA: [{motos.placa}] - Moto Modelo: {motos.nome}, {motos.data_fabricado}, de {motos.numero_rodas} rodas, com a Potência de: {motos.potencia} cavalos, Cor: {motos.cor}, possui o valor de R${motos.valor}")
         for carros in Veiculos['carros']:
-            print(f"PLACA: [{carros.placa}] - Carro Modelo: {carros.nome}, {carros.data_fabricado}, de {carros.total_portas} de portas, Motor: {carros.modo} com a Potência de: {carros.potencia} cavalos, Cor: {carros.cor}, possui o valor de R${carros.valor}")
+            print(f"{carros.vendido} - PLACA: [{carros.placa}] - Carro Modelo: {carros.nome}, {carros.data_fabricado}, de {carros.total_portas} de portas, Motor: {carros.modo} com a Potência de: {carros.potencia} cavalos, Cor: {carros.cor}, possui o valor de R${carros.valor}")
         for camionetes in Veiculos['camionetes']:
-            print(f"PLACA: [{camionetes.placa}] - Camionete Modelo: {camionetes.nome}, {camionetes.data_fabricado}, Motor: {camionetes.modo} com a Potência de: {camionetes.potencia} cavalos, Caçamba com capacidade de {camionetes.cap_cacamba} litros, Cor: {camionetes.cor}, possui o valor de R$ {camionetes.valor}")
+            print(f"{camionetes.vendido} - PLACA: [{camionetes.placa}] - Camionete Modelo: {camionetes.nome}, {camionetes.data_fabricado}, Motor: {camionetes.modo} com a Potência de: {camionetes.potencia} cavalos, Caçamba com capacidade de {camionetes.cap_cacamba} litros, Cor: {camionetes.cor}, possui o valor de R$ {camionetes.valor}")
 
     @staticmethod
     def mostrarTodosVendidos():
         for motos in Veiculos['motos']:
-                if motos.vendido == True :
-                    print(f"[VENDIDO] PLACA: [{motos.placa}] - Moto Modelo: {motos.nome}, {motos.data_fabricado}, de {motos.numero_rodas} rodas, com a Potência de: {motos.potencia} cavalos, Cor: {motos.cor}, possui o valor de R${motos.valor}")
+                if motos.vendido == "VENDIDO" :
+                    print(f"[{motos.vendido}] PLACA: [{motos.placa}] - Moto Modelo: {motos.nome}, {motos.data_fabricado}, de {motos.numero_rodas} rodas, com a Potência de: {motos.potencia} cavalos, Cor: {motos.cor}, possui o valor de R${motos.valor}")
         for carros in Veiculos['carros']:
-            if carros.vendido == True :
-                print(f"[VENDIDO] PLACA: [{carros.placa}] - Carro Modelo: {carros.nome}, {carros.data_fabricado}, de {carros.total_portas} de portas, Motor: {carros.modo} com a Potência de: {carros.potencia} cavalos, Cor: {carros.cor}, possui o valor de R${carros.valor}")
+            if carros.vendido == "VENDIDO" :
+                print(f"[{carros.vendido}] PLACA: [{carros.placa}] - Carro Modelo: {carros.nome}, {carros.data_fabricado}, de {carros.total_portas} de portas, Motor: {carros.modo} com a Potência de: {carros.potencia} cavalos, Cor: {carros.cor}, possui o valor de R${carros.valor}")
         for camionetes in Veiculos['camionetes']:
-            if camionetes.vendido == True :
-                print(f"[VENDIDO] PLACA: [{camionetes.placa}] - Camionete Modelo: {camionetes.nome}, {camionetes.data_fabricado}, Motor: {camionetes.modo} com a Potência de: {camionetes.potencia} cavalos, Caçamba com capacidade de {camionetes.cap_cacamba} litros, Cor: {camionetes.cor}, possui o valor de R$ {camionetes.valor}")
+            if camionetes.vendido == "VENDIDO" :
+                print(f"[{camionetes.vendido}] PLACA: [{camionetes.placa}] - Camionete Modelo: {camionetes.nome}, {camionetes.data_fabricado}, Motor: {camionetes.modo} com a Potência de: {camionetes.potencia} cavalos, Caçamba com capacidade de {camionetes.cap_cacamba} litros, Cor: {camionetes.cor}, possui o valor de R$ {camionetes.valor}")
 
 
 
@@ -75,7 +87,7 @@ class Moto(Veiculo):
     @staticmethod
     def MostrarMotos():
         for motos in Veiculos['motos']:
-            if motos.vendido == False :
+            if motos.vendido == "Disponivel" :
                 print(f"PLACA: [{motos.placa}]  - Moto Modelo: {motos.nome}, {motos.data_fabricado}, de {motos.numero_rodas} rodas, com a Potência de: {motos.potencia} cavalos, Cor: {motos.cor}, possui o valor de R${motos.valor}")
 
 
@@ -94,7 +106,7 @@ class Carro(Veiculo):
     @staticmethod
     def MostrarCarros():
         for carros in Veiculos['carros']:
-            if carros.vendido == False:
+            if carros.vendido == "Disponivel" :
                 print(f"PLACA: [{carros.placa}] - Carro Modelo: {carros.nome}, {carros.data_fabricado}, de {carros.total_portas} de portas, Motor: {carros.modo} com a Potência de: {carros.potencia} cavalos, Cor: {carros.cor}, possui o valor de R${carros.valor}")
 
 
@@ -114,8 +126,8 @@ class Camionete(Veiculo):
     @staticmethod
     def MostrarCamionetes():
         for camionetes in Veiculos['camionetes']:
-            if camionetes.vendido == False:
-                print(f"PLACA: [{camionetes.placa}] - Camionete Modelo: {camionetes.nome}, {camionetes.data_fabricado}, Motor: {camionetes.modo} com a Potência de: {camionetes.potencia} cavalos, Caçamba com capacidade de {camionetes.cap_cacamba} litros, Cor: {camionetes.cor}, possui o valor de R$ {camionetes.valor}")
+            if camionetes.vendido == "Disponivel":
+                print(f"PLACA: [{camionetes.placa}] - Camionete Modelo: {camionetes.nome}, {camionetes.data_fabricado}, Motor: {camionetes.modo} com a Potência de: {camionetes.potencia} cavalos, Caçamba com capacidade de {camionetes.cap_cacamba} litros, Cor: {camionetes.cor}, possui o valor de R${camionetes.valor}")
 
 
 class Transferencia:
@@ -157,10 +169,11 @@ while continuar == True:
     print("                     DEVinCar                           ")
     print("========================================================")
     print(" [1] - Vender carro.")
-    print(" [2] - Ver carros.")
+    print(" [2] - Ver carros disponiveis.")
     print(" [3] - Ver carros vendidos.")
     print(" [4] - Listar todos os veiculos.")
-    print(" [5] - Para sair.")
+    print(" [5] - Pesquisar Informação.")
+    print(" [6] - Para sair.")
     print("========================================================")
     print(" ")
     opcaoEscolhida = input("Digite a opção escolhida: ")
@@ -189,7 +202,7 @@ while continuar == True:
         if opcaoEscolhida2 == "2":
             Carro.MostrarCarros()
             carroEscolhido = input("Insira a placa do carro escolhido: ")
-            carroEscolhido = carroEscolhido.upper
+            carroEscolhido = carroEscolhido.upper()
             try:
                 resultIndice = next(i for i,obj in enumerate(Veiculos['carros']) if obj.placa == carroEscolhido)
             except:
@@ -241,8 +254,19 @@ while continuar == True:
     elif opcaoEscolhida == "4" :
         Veiculo.mostrarTodos()
 
-
     elif opcaoEscolhida == "5" :
+        VeiculoPesquisado = input("Insira a placa do veiculo a ser procurado: ")
+        VeiculoPesquisado = VeiculoPesquisado.upper()
+        VeiculosTodos = Motos + Carros + Camionetes
+        try:
+            resultIndice = next(i for i,obj in enumerate(VeiculosTodos) if obj.placa == VeiculoPesquisado)
+        except:
+            print("Veiculo não encontrado!")
+        else:
+            VeiculosTodos[resultIndice].ListarInformacao()
+
+
+    elif opcaoEscolhida == "6" :
         print("Você saiu!")
         break
 
