@@ -97,9 +97,9 @@ class Moto(Veiculo):
         super().__init__(data_fabricado, nome, placa, valor, cor)
         self.potencia = potencia
         self.numero_rodas = numero_rodas
-        
-    def CadastrarMoto(self):
-        Motos.append(self)
+
+    def CadastrarMoto(data_fabricado, nome, placa, valor, cor, potencia, numero_rodas):
+        Motos.append(Moto(data_fabricado, nome, placa, valor, cor, potencia, numero_rodas))
         Veiculos['motos'] = Motos
 
     def ListarInformacao(self):
@@ -123,8 +123,8 @@ class Carro(Veiculo):
         self.modo = modo
         self.potencia = potencia
 
-    def CadastrarCarro(self):
-        Carros.append(self)
+    def CadastrarCarro(data_fabricado, nome, placa, valor, cor, total_portas, modo, potencia):
+        Carros.append(Carro(data_fabricado, nome, placa, valor, cor, total_portas, modo, potencia))
         Veiculos['carros'] = Carros
 
     def ListarInformacao(self):
@@ -149,8 +149,8 @@ class Camionete(Veiculo):
         self.potencia = potencia
         self.modo = modo
 
-    def CadastrarCamionetes(self):
-        Camionetes.append(self)
+    def CadastrarCamionetes(data_fabricado, nome, placa, valor, total_portas, cap_cacamba, potencia, modo):
+        Camionetes.append(Camionete(data_fabricado, nome, placa, valor, total_portas, cap_cacamba, potencia, modo))
         Veiculos['camionetes'] = Camionetes
 
     def ListarInformacao(self):
@@ -195,9 +195,9 @@ class Transferencia:
         print("----------------------------")
         print("    MENOR VALOR DE VENDA")
         print("----------------------------")
-        menorPreco = 0
+        menorPreco = maiorPreco
         for preco in TransferenciasRealizadas:
-            if preco.valor <= maiorPreco:
+            if preco.valor < menorPreco:
                 menorPreco = preco.valor
         print(f"E o menor valor de venda realizado foi R${menorPreco}!")
         result2 = [x for x in TransferenciasRealizadas if x.valor == menorPreco]
@@ -206,26 +206,17 @@ class Transferencia:
 
 
 
-moto1 = Moto("2019", "Harley Davidson", "39AKB1", 39000, "Vermelha", 100, 2)
-moto1.CadastrarMoto()
-moto2 = Moto("2020", "Yamaha", "399BB1", 39300, "Azul", 130, 3)
-moto2.CadastrarMoto()
-moto3 = Moto("1999", "Honda", "319AZB", 15490, "Preta", 90, 2)
-moto3.CadastrarMoto()
+Moto.CadastrarMoto("2019", "Harley Davidson", "39AKB1", 39000, "Vermelha", 100, 2)
+Moto.CadastrarMoto("2020", "Yamaha", "399BB1", 39300, "Azul", 130, 3)
+Moto.CadastrarMoto("1999", "Honda", "319AZB", 15490, "Preta", 90, 2)
 
-carro1 = Carro("1969", "Ford Mustang", "B9318C", 278000, "Preto", 2, "Gasolina", 483)
-carro1.CadastrarCarro()
-carro2 = Carro("1990", "Ford Mustang GT", "LC319C", 385000, "Cinza", 2, "Gasolina", 490)
-carro2.CadastrarCarro()
-carro3 = Carro("2010", "Lamborghini", "C1C9LK", 560000, "Laranja", 2, "Flex", 433)
-carro3.CadastrarCarro()
+Carro.CadastrarCarro("1969", "Ford Mustang", "B9318C", 278000, "Preto", 2, "Gasolina", 483)
+Carro.CadastrarCarro("1990", "Ford Mustang GT", "LC319C", 385000, "Cinza", 2, "Gasolina", 490)
+Carro.CadastrarCarro("2010", "Lamborghini", "C1C9LK", 560000, "Laranja", 2, "Flex", 433)
 
-camionete1 = Camionete("2020", "Mitsubishi L200 Triton", "KCZ1CL", 145000, 4, 6000, 400, "Diesel")
-camionete1.CadastrarCamionetes()
-camionete2 = Camionete("2021", "Chevrolet S10 Z71", "L3Z1MC", 185000, 4, 4000, 410, "Gasolina")
-camionete2.CadastrarCamionetes()
-camionete3 = Camionete("2018", "Fiat Toro", "Z351CL", 193200, 4, 5500, 390, "Diesel")
-camionete3.CadastrarCamionetes()
+Camionete.CadastrarCamionetes("2020", "Mitsubishi L200 Triton", "KCZ1CL", 145000, 4, 6000, 400, "Diesel")
+Camionete.CadastrarCamionetes("2021", "Chevrolet S10 Z71", "L3Z1MC", 185000, 4, 4000, 410, "Gasolina")
+Camionete.CadastrarCamionetes("2018", "Fiat Toro", "Z351CL", 193200, 4, 5500, 390, "Diesel")
 
 print("RODOU!")
 
@@ -241,7 +232,8 @@ while continuar == True:
     print(" [4] - Listar todos os veículos.")
     print(" [5] - Pesquisar informação do veículo.")
     print(" [6] - Alterar informação do veículo.")
-    print(" [7] - Para sair.")
+    print(" [7] - Para Cadastrar um novo veiculo.")
+    print(" [8] - Para sair.")
     print("========================================================")
     print(" ")
     opcaoEscolhida = input("Digite a opção escolhida: ")
@@ -267,7 +259,7 @@ while continuar == True:
             else:
                 Motos[resultIndice].VenderVeiculo()
 
-        if opcaoEscolhida2 == "2":
+        elif opcaoEscolhida2 == "2":
             Carro.MostrarCarros()
             carroEscolhido = input("Insira a placa do carro escolhido: ")
             carroEscolhido = carroEscolhido.upper()
@@ -278,7 +270,7 @@ while continuar == True:
             else:
                 Carros[resultIndice].VenderVeiculo()
 
-        if opcaoEscolhida2 == "3":
+        elif opcaoEscolhida2 == "3":
             Camionete.MostrarCamionetes()
             camioneteEscolhida = input("Insira a placa da camionete escolhida: ")
             camioneteEscolhida = camioneteEscolhida.upper()
@@ -289,8 +281,11 @@ while continuar == True:
             else:
                 Camionetes[resultIndice].VenderVeiculo()
 
-        if opcaoEscolhida2 == "4":
+        elif opcaoEscolhida2 == "4":
             continue
+
+        else:
+            print("Opção Invalida!")
 
 
     elif opcaoEscolhida == "2" :
@@ -348,6 +343,58 @@ while continuar == True:
 
 
     elif opcaoEscolhida == "7" :
+        print("------------------------------------")
+        print("      CADASTRO DE VEICULO")
+        print("------------------------------------")
+        print("Selecione o tipo de veículo: ")
+        print(" [1] - Moto/Triciclo.")
+        print(" [2] - Carro.")
+        print(" [3] - Camionete.")
+        print("")
+        print(" [4] - Cancelar")
+        opcaoEscolhida2 = input("Digite a opção: ")
+        if opcaoEscolhida2 == "1" :
+            nome = input("Digite o nome do modelo da motocicleta: ")
+            data_fabricado = input("Digite o ano de fabricação do modelo: ")
+            placa = input("Digite a placa da motocicleta: ")
+            valor = float(input("Insira o valor da motocicleta: R$"))
+            cor = input("Digite a cor da motocicleta: ")
+            potencia = int(input("Digite a potência da motocicleta: "))
+            numero_rodas = int(input("Digite o número de rodas da motocicleta: "))
+            Moto.CadastrarMoto(data_fabricado, nome, placa, valor, cor, potencia, numero_rodas)
+            print("Motocicleta cadastrada com sucesso!")
+
+        elif opcaoEscolhida2 == "2" :
+            nome = input("Digite o nome do modelo do veículo: ")
+            data_fabricado = input("Digite o ano de fabricação do modelo: ")
+            placa = input("Digite a placa do veículo: ")
+            valor = float(input("Insira o valor do veículo: R$"))
+            cor = input("Digite a cor do veículo: ")
+            potencia = int(input("Digite a potência do veículo: "))
+            total_portas = int(input("Digite o número de portas do veículo: "))
+            modo = input("O motor do veículo é a Gasolina ou Flex?")
+            Carro.CadastrarCarro(data_fabricado, nome, placa, valor, cor, total_portas, modo, potencia)
+            print("Carro cadastrado com sucesso!")
+
+        elif opcaoEscolhida2 == "3" :
+            nome = input("Digite o nome do modelo da camionete: ")
+            data_fabricado = input("Digite o ano de fabricação do modelo: ")
+            placa = input("Digite a placa da camionete: ")
+            valor = float(input("Insira o valor da camionete: R$"))
+            cap_cacamba = int(input("Digite a capacidade da caçamba da camionete (em litros): "))
+            potencia = int(input("Digite a potência da camionete: "))
+            total_portas = int(input("Digite o número de portas da camionete: "))
+            modo = input("O motor da camionete é a Gasolina ou Flex?")
+            Camionete.CadastrarCamionetes(data_fabricado, nome, placa, valor, total_portas, cap_cacamba, potencia, modo)
+            print("Camionete Cadastrada com sucesso!")
+
+        elif opcaoEscolhida2 == "4":
+            continue
+
+        else:
+            print("Opção Invalida!")
+
+    elif opcaoEscolhida == "8" :
         print("Você saiu!")
         break
 
