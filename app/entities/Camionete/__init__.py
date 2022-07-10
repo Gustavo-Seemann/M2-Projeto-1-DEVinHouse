@@ -35,7 +35,7 @@ class Camionete(Veiculo):
 
 # ------------------------------------------------------------------------
 # Camionetes já instaciadas para exemplo.
-Camionete.CadastrarCamionetes("2020", "Mitsubishi L200 Triton", "KCZ1CL", 145000, 4, 6000, 400, "Diesel")
-Camionete.CadastrarCamionetes("2021", "Chevrolet S10 Z71", "L3Z1MC", 185000, 4, 4000, 410, "Gasolina")
-Camionete.CadastrarCamionetes("2018", "Fiat Toro", "Z351CL", 193200, 4, 5500, 390, "Diesel")
+Camionete.CadastrarCamionetes("2020", "Mitsubishi L200 Triton", "JZK7677", 193000, 4, 1046, 190, "Diesel")
+Camionete.CadastrarCamionetes("2021", "Chevrolet S10 Z71", "HRG9232", 283000, 4, 1061, 200, "Gasolina")
+Camionete.CadastrarCamionetes("2020", "Fiat Toro", "GQL8181", 137000, 4, 937, 170, "Diesel")
 # ------------------------------------------------------------------------

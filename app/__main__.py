@@ -152,7 +152,7 @@ while continuar == True:
             cor = input("Digite a cor do veículo: ")
             potencia = int(input("Digite a potência do veículo: "))
             total_portas = int(input("Digite o número de portas do veículo: "))
-            modo = input("O motor do veículo é a Gasolina ou Flex?")
+            modo = input("O motor do veículo é a Gasolina ou Flex? ")
             Carro.CadastrarCarro(data_fabricado, nome, placa, valor, cor, total_portas, modo, potencia)
             print("Carro cadastrado com sucesso!")
 
@@ -164,7 +164,7 @@ while continuar == True:
             cap_cacamba = int(input("Digite a capacidade da caçamba da camionete (em litros): "))
             potencia = int(input("Digite a potência da camionete: "))
             total_portas = int(input("Digite o número de portas da camionete: "))
-            modo = input("O motor da camionete é a Gasolina ou Flex?")
+            modo = input("O motor da camionete é a Gasolina ou Flex? ")
             Camionete.CadastrarCamionetes(data_fabricado, nome, placa, valor, total_portas, cap_cacamba, potencia, modo)
             print("Camionete Cadastrada com sucesso!")
 
@@ -184,7 +184,7 @@ while continuar == True:
         continue
     
     while True:
-        resposta = input("\nDeseja continuar?\n [S] para SIM \n [N] para NÃO \n")
+        resposta = input("\nDeseja continuar?\n [S] para SIM \n [N] para NÃO \n Digite a opção: ")
         if resposta.lower() == "s" :
             continuar = True
             break

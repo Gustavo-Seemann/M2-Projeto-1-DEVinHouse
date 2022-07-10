@@ -26,7 +26,7 @@ class Moto(Veiculo):
 
 # ------------------------------------------------------------------------
 # Motos já instanciadas para exemplo:
-Moto.CadastrarMoto("2019", "Harley Davidson", "39AKB1", 39000, "Vermelha", 100, 2)
-Moto.CadastrarMoto("2020", "Yamaha", "399BB1", 39300, "Azul", 130, 3)
-Moto.CadastrarMoto("1999", "Honda", "319AZB", 15490, "Preta", 90, 2)
+Moto.CadastrarMoto("2019", "Yamaha YZF-R3", "HVG9437", 23990, "Vermelha", 42, 2)
+Moto.CadastrarMoto("2020", "Kawasaki Ninja ZX-6R 636", "IGO1606", 49900, "Verde", 130, 2)
+Moto.CadastrarMoto("2018", "BMW R 1200 GS", "JNQ3477", 73300, "Preta", 125, 2)
 # ------------------------------------------------------------------------

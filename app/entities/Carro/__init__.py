@@ -27,7 +27,7 @@ class Carro(Veiculo):
 
 # ------------------------------------------------------------------------
 # Carros já instanciados para exemplo.
-Carro.CadastrarCarro("1969", "Ford Mustang", "B9318C", 278000, "Preto", 2, "Gasolina", 483)
-Carro.CadastrarCarro("1990", "Ford Mustang GT", "LC319C", 385000, "Cinza", 2, "Gasolina", 490)
-Carro.CadastrarCarro("2010", "Lamborghini", "C1C9LK", 560000, "Laranja", 2, "Flex", 433)
+Carro.CadastrarCarro("1969", "Ford Mustang GT", "KUT3379", 126100, "Preto", 2, "Gasolina", 130)
+Carro.CadastrarCarro("2022", "Rimac Nevera", "IGM9344", 12000000, "Vermelho", 2, "Flex", 1914)
+Carro.CadastrarCarro("2006", "Lamborghini Gallardo", "GIX7698", 500000, "Laranja", 2, "Gasolina", 560)
 # ------------------------------------------------------------------------
