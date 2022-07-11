@@ -164,7 +164,7 @@ while continuar == True:
             cap_cacamba = int(input("Digite a capacidade da caçamba da camionete (em litros): "))
             potencia = int(input("Digite a potência da camionete: "))
             total_portas = int(input("Digite o número de portas da camionete: "))
-            modo = input("O motor da camionete é a Gasolina ou Flex? ")
+            modo = input("O motor da camionete é a Gasolina ou Diesel? ")
             Camionete.CadastrarCamionetes(data_fabricado, nome, placa, valor, total_portas, cap_cacamba, potencia, modo)
             print("Camionete Cadastrada com sucesso!")
 
